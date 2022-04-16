@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B11F5F22808AE6000D4BB5B /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B11F5F12808AE6000D4BB5B /* ProfileHeaderView.swift */; };
 		1BB61F1B2804A9E50058AC23 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB61F1A2804A9E50058AC23 /* MainTabBarController.swift */; };
 		1BB61F1D2804A9F90058AC23 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB61F1C2804A9F90058AC23 /* FeedViewController.swift */; };
 		1BB61F1F2804AA080058AC23 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB61F1E2804AA080058AC23 /* ProfileViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B11F5F12808AE6000D4BB5B /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		1BB61F1A2804A9E50058AC23 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1BB61F1C2804A9F90058AC23 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		1BB61F1E2804AA080058AC23 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -43,13 +45,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B11F5F02808AE1F00D4BB5B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1BB61F1E2804AA080058AC23 /* ProfileViewController.swift */,
+				1B11F5F12808AE6000D4BB5B /* ProfileHeaderView.swift */,
+			);
+			name = Profile;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		1BB61F262804AAC90058AC23 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				1BB61F1C2804A9F90058AC23 /* FeedViewController.swift */,
-				1BB61F1E2804AA080058AC23 /* ProfileViewController.swift */,
 				1BB61F202804AA160058AC23 /* PostViewController.swift */,
 				1BB61F222804AA260058AC23 /* InfoViewController.swift */,
+				1B11F5F02808AE1F00D4BB5B /* Profile */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -161,6 +173,7 @@
 				1BB61F232804AA260058AC23 /* InfoViewController.swift in Sources */,
 				1BB61F252804AA360058AC23 /* Post.swift in Sources */,
 				1BB61F212804AA160058AC23 /* PostViewController.swift in Sources */,
+				1B11F5F22808AE6000D4BB5B /* ProfileHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

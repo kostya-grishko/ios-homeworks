@@ -23,12 +23,10 @@ class MainTabBarController: UITabBarController {
         profileViewController.tabBarItem.title = "Profile"
         profileViewController.tabBarItem.image = UIImage(systemName: "person")
         feedViewController.navigationItem.title = "Feed"
-        profileViewController.navigationItem.title = "Profile"
         
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         feedNavigationController.navigationBar.prefersLargeTitles = true
-        profileNavigationController.navigationBar.prefersLargeTitles = true
         
         viewControllers = [feedNavigationController, profileNavigationController]
     }
