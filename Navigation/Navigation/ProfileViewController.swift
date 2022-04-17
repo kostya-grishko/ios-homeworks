@@ -18,8 +18,21 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
-        profileHeaderView.frame = self.view.frame
+        super.viewWillLayoutSubviews()
+        profileHeaderViewSetup()
     }
+    
+    private func profileHeaderViewSetup() {
+        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            profileHeaderView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            profileHeaderView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            profileHeaderView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
