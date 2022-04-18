@@ -24,17 +24,16 @@ class ProfileViewController: UIViewController {
     
     private func profileHeaderViewSetup() {
         profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        profileHeaderView.backgroundColor = .systemGray4
         NSLayoutConstraint.activate([
-            profileHeaderView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            profileHeaderView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            profileHeaderView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            profileHeaderView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 240)
         ])
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
 }

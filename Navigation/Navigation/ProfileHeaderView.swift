@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    private var statusText: String = "Waiting for something"
+    private var statusText: String = ""
     
     private let profileImage: UIImageView = {
         let profileImage = UIImageView()
@@ -68,7 +68,6 @@ class ProfileHeaderView: UIView {
         button.titleLabel?.textAlignment = .center
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
-        button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowRadius = 7.0
         button.layer.shadowOpacity = 0.7
         button.layer.shadowOffset = CGSize(width: 1, height: 1)
@@ -79,7 +78,12 @@ class ProfileHeaderView: UIView {
     }()
     
     @objc private func buttonPressed() {
-        statusLabel.text = String(statusText)
+        guard !statusText.isEmpty else {
+            statusTextFieldAnimateEmpty()
+            return
+        }
+        statusTextFieldAnimateNotEmpty()
+        statusLabel.text = statusText
         self.endEditing(true)
     }
     
@@ -87,10 +91,30 @@ class ProfileHeaderView: UIView {
         statusText = statusTextField.text ?? "Empty"
     }
     
+    private func statusTextFieldAnimateEmpty() {
+        UIView.animate(withDuration: 0.5) {
+            self.statusTextField.layer.borderWidth = 2
+            self.statusTextField.layer.borderColor = UIColor.red.cgColor
+            self.statusTextField.layer.shadowRadius = 7.0
+            self.statusTextField.layer.shadowOpacity = 0.2
+            self.statusTextField.layer.shadowOffset = CGSize(width: 1, height: 1)
+            self.statusTextField.layer.shadowColor = UIColor.black.cgColor
+        }
+    }
+    
+    private func statusTextFieldAnimateNotEmpty() {
+        UIView.animate(withDuration: 0.5) {
+            self.statusTextField.layer.borderWidth = 1
+            self.statusTextField.layer.borderColor = UIColor.black.cgColor
+            self.statusTextField.layer.shadowRadius = 0
+            self.statusTextField.layer.shadowOpacity = 0
+            self.statusTextField.layer.shadowOffset = CGSize(width: 0, height: 0)
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -101,8 +125,8 @@ class ProfileHeaderView: UIView {
         [profileImage, fullNameLabel, statusLabel, statusTextField, setStatusButton].forEach { addSubview($0) }
         
         NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
-            profileImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             profileImage.widthAnchor.constraint(equalToConstant: 150),
             profileImage.heightAnchor.constraint(equalToConstant: 150)
         ])
@@ -113,7 +137,6 @@ class ProfileHeaderView: UIView {
             fullNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             fullNameLabel.heightAnchor.constraint(equalToConstant: 35)
         ])
-        
         
         NSLayoutConstraint.activate([
             statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 10),
