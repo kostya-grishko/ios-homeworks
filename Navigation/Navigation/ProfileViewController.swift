@@ -15,11 +15,11 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         view.addSubview(profileHeaderView)
+        profileHeaderViewSetup()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        profileHeaderViewSetup()
     }
     
     private func profileHeaderViewSetup() {
@@ -32,7 +32,6 @@ class ProfileViewController: UIViewController {
             profileHeaderView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
