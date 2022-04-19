@@ -52,7 +52,6 @@
 				1B11F5F12808AE6000D4BB5B /* ProfileHeaderView.swift */,
 			);
 			name = Profile;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		1BB61F262804AAC90058AC23 /* Controllers */ = {
@@ -61,7 +60,6 @@
 				1BB61F1C2804A9F90058AC23 /* FeedViewController.swift */,
 				1BB61F202804AA160058AC23 /* PostViewController.swift */,
 				1BB61F222804AA260058AC23 /* InfoViewController.swift */,
-				1B11F5F02808AE1F00D4BB5B /* Profile */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -85,10 +83,11 @@
 		1BE1D4E427DCF43D0059A552 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				1BB61F262804AAC90058AC23 /* Controllers */,
+				1B11F5F02808AE1F00D4BB5B /* Profile */,
 				1BE1D4E527DCF43D0059A552 /* AppDelegate.swift */,
 				1BB61F1A2804A9E50058AC23 /* MainTabBarController.swift */,
 				1BB61F242804AA360058AC23 /* Post.swift */,
-				1BB61F262804AAC90058AC23 /* Controllers */,
 				1BE1D4EE27DCF43E0059A552 /* Assets.xcassets */,
 				1BE1D4F027DCF43E0059A552 /* LaunchScreen.storyboard */,
 				1BE1D4F327DCF43E0059A552 /* Info.plist */,

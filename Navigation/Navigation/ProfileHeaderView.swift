@@ -8,7 +8,8 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-    
+
+//    MARK: - properties
     private var statusText: String = ""
     
     private let profileImage: UIImageView = {
@@ -63,9 +64,8 @@ class ProfileHeaderView: UIView {
     
     private lazy var setStatusButton: UIButton = {
         var button = UIButton()
-        button.setTitle(Post(title:"Set status").title, for: .normal)
+        button.setTitle("Set status", for: .normal)
         button.backgroundColor = .systemBlue
-        button.titleLabel?.textAlignment = .center
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.layer.shadowRadius = 7.0
@@ -77,6 +77,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
+//    MARK: - funcs
     @objc private func buttonPressed() {
         guard !statusText.isEmpty else {
             statusTextFieldAnimateEmpty()
@@ -112,15 +113,6 @@ class ProfileHeaderView: UIView {
         }
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        layout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private func layout() {
         [profileImage, fullNameLabel, statusLabel, statusTextField, setStatusButton].forEach { addSubview($0) }
         
@@ -158,5 +150,15 @@ class ProfileHeaderView: UIView {
             setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             setStatusButton.heightAnchor.constraint(equalToConstant: 45)
         ])
+    }
+    
+//    MARK: - inits
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
