@@ -10,7 +10,7 @@ import UIKit
 class MainTabBarController: UITabBarController {
     
     let feedViewController = FeedViewController()
-    let profileViewController = ProfileViewController()
+    let loginViewController = LogInViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +18,15 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setupViewControllers() {
+        
         feedViewController.tabBarItem.title = "Feed"
         feedViewController.tabBarItem.image = UIImage(systemName: "house")
-        profileViewController.tabBarItem.title = "Profile"
-        profileViewController.tabBarItem.image = UIImage(systemName: "person")
+        loginViewController.tabBarItem.title = "Profile"
+        loginViewController.tabBarItem.image = UIImage(systemName: "person")
         feedViewController.navigationItem.title = "Feed"
         
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        let profileNavigationController = UINavigationController(rootViewController: loginViewController)
         feedNavigationController.navigationBar.prefersLargeTitles = true
         
         viewControllers = [feedNavigationController, profileNavigationController]

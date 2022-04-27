@@ -8,11 +8,11 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-
-//    MARK: - properties
+    
+    //    MARK: - properties
     private var statusText: String = ""
     
-    private let profileImage: UIImageView = {
+    private var profileImage: UIImageView = {
         let profileImage = UIImageView()
         profileImage.image = UIImage(named: "profile")
         profileImage.layer.borderWidth = 2
@@ -65,7 +65,7 @@ class ProfileHeaderView: UIView {
     private lazy var setStatusButton: UIButton = {
         var button = UIButton()
         button.setTitle("Set status", for: .normal)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = UIColor("#4885CC")
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.layer.shadowRadius = 7.0
@@ -77,7 +77,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-//    MARK: - funcs
+    //    MARK: - funcs
     @objc private func buttonPressed() {
         guard !statusText.isEmpty else {
             statusTextFieldAnimateEmpty()
@@ -112,7 +112,7 @@ class ProfileHeaderView: UIView {
             self.statusTextField.layer.shadowOffset = CGSize(width: 0, height: 0)
         }
     }
-
+    
     private func layout() {
         [profileImage, fullNameLabel, statusLabel, statusTextField, setStatusButton].forEach { addSubview($0) }
         
@@ -152,7 +152,7 @@ class ProfileHeaderView: UIView {
         ])
     }
     
-//    MARK: - inits
+    //    MARK: - inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()

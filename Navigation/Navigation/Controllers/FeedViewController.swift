@@ -9,9 +9,9 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-//    MARK: - properties
+    //    MARK: - properties
     var post = Post(title: "Post")
-
+    
     private lazy var buttonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -24,7 +24,7 @@ class FeedViewController: UIViewController {
     private lazy var firstButton: UIButton = {
         let button = UIButton()
         button.setTitle("First button", for: .normal)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = UIColor("#4885CC")
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(showPost), for: .touchUpInside)
@@ -35,15 +35,15 @@ class FeedViewController: UIViewController {
     private lazy var secondButton: UIButton = {
         let button = UIButton()
         button.setTitle("Second button", for: .normal)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = UIColor("#4885CC")
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(showPost), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-  
-// MARK: - funcs
+    
+    // MARK: - funcs
     @objc private func showPost() {
         let viewController = PostViewController()
         viewController.post = post
