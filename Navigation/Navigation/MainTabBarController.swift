@@ -19,6 +19,8 @@ class MainTabBarController: UITabBarController {
     
     private func setupViewControllers() {
         
+        UITabBar.appearance().tintColor = UIColor("#4885CC")
+        
         feedViewController.tabBarItem.title = "Feed"
         feedViewController.tabBarItem.image = UIImage(systemName: "house")
         loginViewController.tabBarItem.title = "Profile"
