@@ -20,7 +20,6 @@ class ProfileHeaderView: UIView {
         profileImage.layer.cornerRadius = 75
         profileImage.contentMode = .scaleAspectFit
         profileImage.clipsToBounds = true
-        
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         return profileImage
     }()
@@ -114,11 +113,14 @@ class ProfileHeaderView: UIView {
     }
     
     private func layout() {
+
+        self.backgroundColor = .white
+        
         [profileImage, fullNameLabel, statusLabel, statusTextField, setStatusButton].forEach { addSubview($0) }
         
         NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            profileImage.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             profileImage.widthAnchor.constraint(equalToConstant: 150),
             profileImage.heightAnchor.constraint(equalToConstant: 150)
         ])
@@ -126,28 +128,28 @@ class ProfileHeaderView: UIView {
         NSLayoutConstraint.activate([
             fullNameLabel.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 20),
             fullNameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
-            fullNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            fullNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             fullNameLabel.heightAnchor.constraint(equalToConstant: 35)
         ])
         
         NSLayoutConstraint.activate([
             statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 10),
             statusLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
-            statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             statusLabel.heightAnchor.constraint(equalToConstant: 25)
         ])
         
         NSLayoutConstraint.activate([
             statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
             statusTextField.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
-            statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25),
+            statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25),
             statusTextField.heightAnchor.constraint(equalToConstant: 25)
         ])
         
         NSLayoutConstraint.activate([
             setStatusButton.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20),
             setStatusButton.leadingAnchor.constraint(equalTo: profileImage.leadingAnchor),
-            setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             setStatusButton.heightAnchor.constraint(equalToConstant: 45)
         ])
     }
