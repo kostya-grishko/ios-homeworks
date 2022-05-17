@@ -9,6 +9,8 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
+    private var postArrayCell = ProfileViewController()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +44,7 @@ class PostTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
         label.font = UIFont.systemFont(ofSize: 14, weight: .thin)
-        label.textAlignment = .right
+        label.textAlignment = .left
         label.numberOfLines = 1
         return label
     }()
@@ -50,13 +52,34 @@ class PostTableViewCell: UITableViewCell {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
         label.backgroundColor = .clear
         label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()
     
+    lazy var likeButton: UIButton = {
+        let likeButton = HeartButton()
+        likeButton.translatesAutoresizingMaskIntoConstraints = false
+        likeButton.addTarget(self, action: #selector(handleHeartButtonTap(_:)), for: .touchUpInside)
+        return likeButton
+    }()
     
+    private let viewButton: UIImageView = {
+        let viewButton = UIImageView()
+        viewButton.translatesAutoresizingMaskIntoConstraints = false
+        viewButton.image = UIImage(named: "view")
+        return viewButton
+    }()
+    
+    @objc private func handleHeartButtonTap(_ sender: UIButton) {
+        guard let button = sender as? HeartButton else { return }
+        button.flipLikedState()
+        let indexPathRow = sender.tag
+        
+        button.isLiked ? (likeLabel.text = String(describing: postArrayCell.postArray[indexPathRow].likes! + 1)) : (likeLabel.text = String(describing: postArrayCell.postArray[indexPathRow].likes!))
+    }
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -71,15 +94,14 @@ class PostTableViewCell: UITableViewCell {
     func setupCell(_ post: Post) {
         titleLabel.text = post.title
         postImageView.image = UIImage(named: post.image!)
-        likeLabel.text = "Likes: " + String(describing: post.likes!)
-        viewsLabel.text = "Views: " + String(describing: post.views!)
+        likeLabel.text = String(describing: post.likes!)
+        viewsLabel.text = post.views
         descriptionLabel.text = post.description
     }
     
     
     private func setupView() {
-        [titleLabel, postImageView, likeLabel, viewsLabel, descriptionLabel].forEach { contentView.addSubview($0) }
-        
+        [titleLabel, postImageView, likeLabel, viewsLabel, descriptionLabel, likeButton, viewButton].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -88,28 +110,33 @@ class PostTableViewCell: UITableViewCell {
             titleLabel.heightAnchor.constraint(equalToConstant: 20),
             
             postImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            postImageView.heightAnchor.constraint(equalToConstant: 250),
+            postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            postImageView.heightAnchor.constraint(equalToConstant: 300),
             
             descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 8),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
+            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
             
-            likeLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
-            likeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            likeLabel.widthAnchor.constraint(equalToConstant: 100),
+            likeLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 19),
+            likeLabel.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: 8),
+            likeLabel.widthAnchor.constraint(equalToConstant: 40),
             
-            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
+            likeButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 15),
+            likeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            likeButton.widthAnchor.constraint(equalToConstant: 25),
+            likeButton.heightAnchor.constraint(equalToConstant: 25),
+            
+            viewButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 15),
+            viewButton.trailingAnchor.constraint(equalTo: viewsLabel.leadingAnchor, constant: -8),
+            viewButton.widthAnchor.constraint(equalToConstant: 25),
+            viewButton.heightAnchor.constraint(equalToConstant: 25),
+            
+            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 19),
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            viewsLabel.widthAnchor.constraint(equalToConstant: 100),
+            viewsLabel.widthAnchor.constraint(equalToConstant: 40),
         ])
-        
-        
-        
-        
-        
         
     }
     
@@ -118,5 +145,5 @@ class PostTableViewCell: UITableViewCell {
     
     
     
-
+    
 }

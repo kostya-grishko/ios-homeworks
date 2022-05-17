@@ -11,20 +11,15 @@ class ProfileViewController: UIViewController {
     
     // MARK: - properties
     
-//    let profileHeaderView = ProfileHeaderView()
+    open var postArray: [Post] = Post.uploadPosts()
     
-    private var postArray: [Post] = Post.uploadPosts()
-    
-    private lazy var postTableView: UITableView = {
+    lazy var postTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        
         return tableView
     }()
     
@@ -32,8 +27,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-//        view.addSubview(profileHeaderView)
-//        profileHeaderViewSetup()
         postTableViewSetup()
     }
     
@@ -53,27 +46,14 @@ class ProfileViewController: UIViewController {
     }
     
     
-    
-//    private func profileHeaderViewSetup() {
-//        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-//        profileHeaderView.backgroundColor = .systemBackground
-//
-//        NSLayoutConstraint.activate([
-//            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            profileHeaderView.heightAnchor.constraint(equalToConstant: 240)
-//        ])
-//    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+
+
+    
 }
-
-
-
-
 
 
 
@@ -89,6 +69,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
         cell.setupCell(postArray[indexPath.row])
+        cell.likeButton.tag = indexPath.row
         return cell
     }
     
@@ -119,3 +100,6 @@ extension ProfileViewController: UITableViewDelegate {
     
     
 }
+
+
+

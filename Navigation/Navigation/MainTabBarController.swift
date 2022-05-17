@@ -9,7 +9,7 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
-    let feedViewController = ProfileViewController()
+    let feedViewController = FeedViewController()
     let loginViewController = LogInViewController()
     
     override func viewDidLoad() {
@@ -29,8 +29,8 @@ class MainTabBarController: UITabBarController {
         
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: loginViewController)
-//        feedNavigationController.navigationBar.prefersLargeTitles = true
-        feedNavigationController.navigationBar.isHidden = true
+        feedNavigationController.navigationBar.prefersLargeTitles = true
+
         
         viewControllers = [feedNavigationController, profileNavigationController]
     }
