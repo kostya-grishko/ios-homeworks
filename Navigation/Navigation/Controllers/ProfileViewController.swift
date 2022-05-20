@@ -3,7 +3,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    open var postArray: [Post] = Post.uploadPosts()
+    public var postArray: [Post] = Post.uploadPosts()
     
     lazy var postTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -38,6 +38,15 @@ class ProfileViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    public func changeLikes(isButtonLiked: Bool, atIndex: Int) -> String {
+        var likes: String
+        let count: Int
+        isButtonLiked ? (postArray[atIndex].likes! += 1) : (postArray[atIndex].likes! -= 1)
+        count = postArray[atIndex].likes!
+        likes = String(describing: count)
+        return likes
     }
 }
 

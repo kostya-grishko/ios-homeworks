@@ -3,7 +3,7 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
-    private var postArrayCell = ProfileViewController()
+    private var profileViewController = ProfileViewController()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -71,8 +71,7 @@ class PostTableViewCell: UITableViewCell {
         guard let button = sender as? HeartButton else { return }
         button.flipLikedState()
         let indexPathRow = sender.tag
-        
-        button.isLiked ? (likeLabel.text = String(describing: postArrayCell.postArray[indexPathRow].likes! + 1)) : (likeLabel.text = String(describing: postArrayCell.postArray[indexPathRow].likes!))
+        likeLabel.text = profileViewController.changeLikes(isButtonLiked: button.isLiked, atIndex: indexPathRow)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -129,6 +128,5 @@ class PostTableViewCell: UITableViewCell {
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             viewsLabel.widthAnchor.constraint(equalToConstant: 40),
         ])
-        
     }
 }
