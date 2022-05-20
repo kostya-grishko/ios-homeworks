@@ -1,13 +1,8 @@
-//
-//  LikeButton.swift
-//  Navigation
-//
-//  Created by Константин Гришко on 17.05.2022.
-//
 
 import UIKit
 
 class HeartButton: UIButton {
+    
     open var isLiked = false
     
     private let unlikedImage = UIImage(named: "heart 1")
@@ -31,8 +26,6 @@ class HeartButton: UIButton {
         animate()
     }
     
-    
-    
     private func animate() {
         UIView.animate(withDuration: 0.1, animations: {
             let newImage = self.isLiked ? self.likedImage : self.unlikedImage
@@ -44,8 +37,5 @@ class HeartButton: UIButton {
                 self.transform = CGAffineTransform.identity
             })
         })
-        
-        
-        
     }
 }

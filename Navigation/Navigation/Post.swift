@@ -1,21 +1,14 @@
-//
-//  Post.swift
-//  test3
-//
-//  Created by Константин Гришко on 11.04.2022.
-//
 
 import Foundation
 
 struct Post {
+    
     var title: String?
     var author: String?
     var description: String?
     var image: String?
     var likes: Int?
-    var views: String? // Сделал временно, чтобы не дописывать логику по переводу
-    
-    
+    var views: String?
     
     static func uploadPosts() -> [Post] {
         
@@ -26,11 +19,6 @@ struct Post {
         postArray.append(Post(title: "Cat’s Worst Christmas", author: "realgrumpycat", description: "Grumpy Cat’s Worst Christmas Ever is streaming NOW on @discoveryplus! Start your free 7 day trial and watch today! It will be terrible!", image: "6343", likes: 8278, views: "32.7k"))
         postArray.append(Post(title: "Grumpy Cat NFTs", author: "realgrumpycat", description: "May the 4th be awful.", image: "5324", likes: 1272, views: "15.8k"))
         
-        
-        
         return postArray
     }
-    
-    
-    
 }

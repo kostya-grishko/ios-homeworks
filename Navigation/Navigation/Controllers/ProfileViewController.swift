@@ -1,15 +1,7 @@
-//
-//  ProfileViewController.swift
-//  test3
-//
-//  Created by Константин Гришко on 11.04.2022.
-//
 
 import UIKit
 
 class ProfileViewController: UIViewController {
-    
-    // MARK: - properties
     
     open var postArray: [Post] = Post.uploadPosts()
     
@@ -23,7 +15,6 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    // MARK: - funcs
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -45,19 +36,10 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-
-
-    
 }
-
-
-
-// MARK: - extentions
 
 extension ProfileViewController: UITableViewDataSource {
     
@@ -72,11 +54,6 @@ extension ProfileViewController: UITableViewDataSource {
         cell.likeButton.tag = indexPath.row
         return cell
     }
-    
-    
-    
-    
-    
 }
 
 extension ProfileViewController: UITableViewDelegate {
@@ -93,12 +70,9 @@ extension ProfileViewController: UITableViewDelegate {
         240
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    
 }
 
 

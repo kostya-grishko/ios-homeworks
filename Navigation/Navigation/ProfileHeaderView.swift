@@ -1,15 +1,8 @@
-//
-//  ProfileHeaderView.swift
-//  Navigation
-//
-//  Created by Константин Гришко on 14.04.2022.
-//
 
 import UIKit
 
 class ProfileHeaderView: UIView {
     
-    //    MARK: - properties
     private var statusText: String = ""
     
     private var profileImage: UIImageView = {
@@ -76,7 +69,6 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    //    MARK: - funcs
     @objc private func buttonPressed() {
         guard !statusText.isEmpty else {
             statusTextFieldAnimateEmpty()
@@ -113,7 +105,7 @@ class ProfileHeaderView: UIView {
     }
     
     private func layout() {
-
+        
         self.backgroundColor = .white
         
         [profileImage, fullNameLabel, statusLabel, statusTextField, setStatusButton].forEach { addSubview($0) }
@@ -154,7 +146,6 @@ class ProfileHeaderView: UIView {
         ])
     }
     
-    //    MARK: - inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()

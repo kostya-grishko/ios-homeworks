@@ -1,15 +1,8 @@
-//
-//  FeedViewController.swift
-//  test3
-//
-//  Created by Константин Гришко on 11.04.2022.
-//
 
 import UIKit
 
 class FeedViewController: UIViewController {
     
-    //    MARK: - properties
     var post = Post(title: "Post")
     
     private lazy var buttonsStackView: UIStackView = {
@@ -43,7 +36,6 @@ class FeedViewController: UIViewController {
         return button
     }()
     
-    // MARK: - funcs
     @objc private func showPost() {
         let viewController = PostViewController()
         viewController.post = post

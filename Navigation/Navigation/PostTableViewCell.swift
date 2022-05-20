@@ -1,9 +1,3 @@
-//
-//  PostTableViewCell.swift
-//  Navigation
-//
-//  Created by Константин Гришко on 15.05.2022.
-//
 
 import UIKit
 
@@ -81,7 +75,6 @@ class PostTableViewCell: UITableViewCell {
         button.isLiked ? (likeLabel.text = String(describing: postArrayCell.postArray[indexPathRow].likes! + 1)) : (likeLabel.text = String(describing: postArrayCell.postArray[indexPathRow].likes!))
     }
     
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
@@ -98,7 +91,6 @@ class PostTableViewCell: UITableViewCell {
         viewsLabel.text = post.views
         descriptionLabel.text = post.description
     }
-    
     
     private func setupView() {
         [titleLabel, postImageView, likeLabel, viewsLabel, descriptionLabel, likeButton, viewButton].forEach { contentView.addSubview($0) }
@@ -139,11 +131,4 @@ class PostTableViewCell: UITableViewCell {
         ])
         
     }
-    
-    
-    
-    
-    
-    
-    
 }

@@ -1,15 +1,7 @@
-//
-//  LogInViewController.swift
-//  Navigation
-//
-//  Created by Константин Гришко on 24.04.2022.
-//
 
 import UIKit
 
 class LogInViewController: UIViewController {
-    
-    // MARK: -  properties
     
     private let notificationCenter = NotificationCenter.default
     
@@ -77,8 +69,6 @@ class LogInViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(moveToProfile), for: .touchUpInside)
         return loginButton
     }()
-    
-    // MARK: -  funcs
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,9 +144,6 @@ class LogInViewController: UIViewController {
         ])
     }
 }
-
-
-// MARK: - extensions
 
 // add hex to UIColor convertation func
 extension UIColor {
