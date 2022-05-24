@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
         return tableView
     }()
     
@@ -43,32 +44,76 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postArray.count
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return postArray.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-        cell.setupCell(postArray[indexPath.row])
-        cell.likeButton.tag = indexPath.row
-        cell.delegate = self
-        return cell
+        switch indexPath.section {
+        case 0:
+            lazy var cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
+            
+            
+            
+            
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+            cell.setupCell(postArray[indexPath.row])
+            cell.likeButton.tag = indexPath.row
+            cell.delegate = self
+            return cell
+        default:
+            return UITableViewCell()
+            
+        }
     }
 }
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+        switch indexPath.section {
+        case 0:
+            return 140
+        case 1:
+            return UITableView.automaticDimension
+            
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = ProfileHeaderView()
-        return header
+        
+        switch section {
+        case 0:
+            let header = ProfileHeaderView()
+            return header
+        default:
+            return UIView()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        240
+        switch section {
+        case 0:
+            return 240
+        case 1:
+            return 0
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
