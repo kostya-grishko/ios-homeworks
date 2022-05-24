@@ -39,15 +39,6 @@ class ProfileViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    public func changeLikes(isButtonLiked: Bool, atIndex: Int) -> String {
-        var likes: String
-        let count: Int
-        isButtonLiked ? (postArray[atIndex].likes! += 1) : (postArray[atIndex].likes! -= 1)
-        count = postArray[atIndex].likes!
-        likes = String(describing: count)
-        return likes
-    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
@@ -61,6 +52,7 @@ extension ProfileViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
         cell.setupCell(postArray[indexPath.row])
         cell.likeButton.tag = indexPath.row
+        cell.delegate = self
         return cell
     }
 }
@@ -84,5 +76,10 @@ extension ProfileViewController: UITableViewDelegate {
     }
 }
 
-
+extension ProfileViewController: PostTableViewCellDelegate {
+    func buttonPressed(cell: PostTableViewCell, AtIndex: Int, isButtonLiked: Bool) {
+        isButtonLiked ? (postArray[AtIndex].likes! += 1) : (postArray[AtIndex].likes! -= 1)
+        cell.likeLabel.text = String(describing: postArray[AtIndex].likes!)
+    }
+}
 

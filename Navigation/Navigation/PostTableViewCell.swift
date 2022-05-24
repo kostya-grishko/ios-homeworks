@@ -1,9 +1,13 @@
 
 import UIKit
 
+protocol PostTableViewCellDelegate: AnyObject {
+    func buttonPressed(cell: PostTableViewCell, AtIndex: Int, isButtonLiked: Bool)
+}
+
 class PostTableViewCell: UITableViewCell {
     
-    private var profileViewController = ProfileViewController()
+    weak var delegate: PostTableViewCellDelegate?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -24,7 +28,7 @@ class PostTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let likeLabel: UILabel = {
+    public let likeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
@@ -71,7 +75,7 @@ class PostTableViewCell: UITableViewCell {
         guard let button = sender as? HeartButton else { return }
         button.flipLikedState()
         let indexPathRow = sender.tag
-        likeLabel.text = profileViewController.changeLikes(isButtonLiked: button.isLiked, atIndex: indexPathRow)
+        delegate?.buttonPressed(cell: self, AtIndex: indexPathRow, isButtonLiked: button.isLiked)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
