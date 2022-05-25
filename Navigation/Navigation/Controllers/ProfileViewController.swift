@@ -63,10 +63,7 @@ extension ProfileViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             lazy var cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
-            
-            
-            
-            
+            cell.delegate = self
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
@@ -128,3 +125,9 @@ extension ProfileViewController: PostTableViewCellDelegate {
     }
 }
 
+extension ProfileViewController: PhotosTableViewDelegate {
+    func buttonPressed() {
+        let viewController = PhotosViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+}
