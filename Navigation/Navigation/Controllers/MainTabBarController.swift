@@ -26,6 +26,6 @@ class MainTabBarController: UITabBarController {
         let loginNavigationController = UINavigationController(rootViewController: loginViewController)
         feedNavigationController.navigationBar.prefersLargeTitles = true
         
-        viewControllers = [feedNavigationController, loginNavigationController]
+        viewControllers = [loginNavigationController, feedNavigationController]
     }
 }

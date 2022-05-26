@@ -86,8 +86,8 @@ class ProfileHeaderView: UIView {
         self.endEditing(true)
     }
     
-    @objc func statusTextChanged(_ textField: UITextField) {
-        statusText = statusTextField.text ?? "Empty"
+    @objc private func statusTextChanged(_ textField: UITextField) {
+        statusText = statusTextField.text ?? ""
     }
     
     private func statusTextFieldAnimateEmpty() {
