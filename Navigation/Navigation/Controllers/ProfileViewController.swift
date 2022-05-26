@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController {
         tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
+        tableView.backgroundColor = .white
         return tableView
     }()
     
@@ -31,9 +32,9 @@ class ProfileViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             postTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            postTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            postTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             postTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            postTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            postTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
