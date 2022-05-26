@@ -5,13 +5,20 @@ class ProfileHeaderView: UIView {
     
     private var statusText: String = ""
     
-    private var profileImage: UIImageView = {
+    private var startingFrame: CGRect?
+    private var buttonClose = UIButton()
+    private var backView = UIView(frame: .zero)
+    private var zoomingImageView = UIImageView(frame: .zero)
+    
+    private lazy var profileImage: UIImageView = {
         let profileImage = UIImageView()
         profileImage.image = UIImage(named: "profile")
         profileImage.layer.borderWidth = 2
         profileImage.layer.borderColor = UIColor.systemGray2.cgColor
         profileImage.layer.cornerRadius = 75
         profileImage.contentMode = .scaleAspectFit
+        profileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(zoomImageView)))
+        profileImage.isUserInteractionEnabled = true
         profileImage.clipsToBounds = true
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         return profileImage
@@ -153,5 +160,66 @@ class ProfileHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func zoomImageView() {
+        self.startingFrame = profileImage.superview?.convert(profileImage.frame, to: nil)
+        zoomingImageView = UIImageView(frame: startingFrame!)
+        zoomingImageView.backgroundColor = .systemPink
+        zoomingImageView.image = profileImage.image
+        
+        if let keyWindow = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).flatMap({ $0.windows }).first(where: { $0.isKeyWindow }) {
+            backView = UIView(frame: keyWindow.frame)
+            
+            setup(buttonClose)
+            setup(backView)
+            
+            keyWindow.addSubview(backView)
+            keyWindow.addSubview(zoomingImageView)
+            keyWindow.addSubview(buttonClose)
+            
+            NSLayoutConstraint.activate([
+                self.buttonClose.topAnchor.constraint(equalTo: self.backView.safeAreaLayoutGuide.topAnchor, constant: 16),
+                self.buttonClose.trailingAnchor.constraint(equalTo: self.backView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+                self.buttonClose.widthAnchor.constraint(equalToConstant: 20),
+                self.buttonClose.heightAnchor.constraint(equalToConstant: 20)
+            ])
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+                self.backView.alpha = 0.8
+                self.zoomingImageView.contentMode = .scaleAspectFill
+                
+                self.zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: self.backView.frame.height / 3)
+                self.zoomingImageView.center = keyWindow.center
+            } completion: { _ in }
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+                self.buttonClose.alpha = 1
+            } completion: { _ in }
+        }
+    }
+    
+    func setup(_ button: UIButton) {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = .white
+        button.alpha = 0
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    }
+    
+    func setup(_ view: UIView) {
+        view.backgroundColor = .darkGray
+        view.alpha = 0
+    }
+    
+    @objc func buttonTapped() {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.buttonClose.alpha = 0
+            self.backView.alpha = 0
+            self.profileImage.alpha = 1
+            self.profileImage.isHidden = false
+            self.zoomingImageView.frame = self.startingFrame!
+            self.zoomingImageView.alpha = 0
+        }, completion: nil)
     }
 }
