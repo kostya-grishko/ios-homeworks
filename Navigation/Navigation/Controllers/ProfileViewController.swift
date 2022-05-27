@@ -25,6 +25,10 @@ class ProfileViewController: UIViewController {
         postTableViewSetup()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        postTableView.reloadData()
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
@@ -124,7 +128,11 @@ extension ProfileViewController: UITableViewDelegate {
          
         if indexPath.section == 1 {
             let detailViewController = DetailViewController()
+            if postArray[indexPath.row].isViewed == false {
+                postArray[indexPath.row].views! += 1
+            }
             detailViewController.setupCell(postArray[indexPath.row])
+            postArray[indexPath.row].isViewed = true
             self.navigationController?.pushViewController(detailViewController, animated: true)
         }
     }
