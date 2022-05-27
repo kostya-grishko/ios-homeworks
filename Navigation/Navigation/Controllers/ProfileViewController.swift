@@ -14,6 +14,8 @@ class ProfileViewController: UIViewController {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
         tableView.backgroundColor = .white
+        tableView.sectionHeaderHeight = 0.0
+        tableView.sectionFooterHeight = 0.0
         return tableView
     }()
     
@@ -119,6 +121,12 @@ extension ProfileViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+         
+        if indexPath.section == 1 {
+            let detailViewController = DetailViewController()
+            detailViewController.setupCell(postArray[indexPath.row])
+            self.navigationController?.pushViewController(detailViewController, animated: true)
+        }
     }
 }
 

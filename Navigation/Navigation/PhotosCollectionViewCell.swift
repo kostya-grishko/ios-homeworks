@@ -49,7 +49,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     @objc func zoomImageView() {
         self.startingFrame = photoImageView.superview?.convert(photoImageView.frame, to: nil)
         zoomingImageView = UIImageView(frame: startingFrame!)
-        zoomingImageView.backgroundColor = .systemPink
+        zoomingImageView.backgroundColor = .clear
         zoomingImageView.image = photoImageView.image
         
         if let keyWindow = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).flatMap({ $0.windows }).first(where: { $0.isKeyWindow }) {

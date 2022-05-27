@@ -1,18 +1,26 @@
 
 import UIKit
 
-protocol PostTableViewCellDelegate: AnyObject {
-    func buttonPressed(cell: PostTableViewCell, AtIndex: Int, isButtonLiked: Bool)
-}
-
-class PostTableViewCell: UITableViewCell {
+class DetailViewController: UIViewController {
     
-    weak var delegate: PostTableViewCellDelegate?
+    private var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private let contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = .clear
+        return contentView
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
+        label.text = "Test test"
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
         label.numberOfLines = 1
@@ -22,25 +30,17 @@ class PostTableViewCell: UITableViewCell {
     private let postImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .clear
+        imageView.image = UIImage(named: "1")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
-    }()
-    
-    public let likeLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
-        label.font = UIFont.systemFont(ofSize: 14, weight: .thin)
-        label.numberOfLines = 1
-        return label
     }()
     
     private let viewsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
+        label.text = "2311"
         label.font = UIFont.systemFont(ofSize: 14, weight: .thin)
         label.textAlignment = .left
         label.numberOfLines = 1
@@ -54,14 +54,9 @@ class PostTableViewCell: UITableViewCell {
         label.backgroundColor = .clear
         label.numberOfLines = 0
         label.textAlignment = .left
+        label.sizeToFit()
+        label.text = "Time to treat your pets to some new accessories! Get the Grumpy Cat collection from @petrageousdesigns available at @amazon - (Link in bio) https://grumpy.cat/gcpetrageous"
         return label
-    }()
-    
-    lazy var likeButton: UIButton = {
-        let likeButton = HeartButton()
-        likeButton.translatesAutoresizingMaskIntoConstraints = false
-        likeButton.addTarget(self, action: #selector(handleHeartButtonTap(_:)), for: .touchUpInside)
-        return likeButton
     }()
     
     private let viewButton: UIImageView = {
@@ -71,32 +66,45 @@ class PostTableViewCell: UITableViewCell {
         return viewButton
     }()
     
-    @objc private func handleHeartButtonTap(_ sender: UIButton) {
-        guard let button = sender as? HeartButton else { return }
-        button.flipLikedState()
-        let indexPathRow = sender.tag
-        delegate?.buttonPressed(cell: self, AtIndex: indexPathRow, isButtonLiked: button.isLiked)
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.title = "Post"
+        self.navigationItem.backButtonTitle = "Back"
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     func setupCell(_ post: Post) {
         titleLabel.text = post.title
         postImageView.image = UIImage(named: post.image!)
-        likeLabel.text = String(describing: post.likes!)
         viewsLabel.text = String(describing: post.views!)
         descriptionLabel.text = post.description
     }
     
     private func setupView() {
-        [titleLabel, postImageView, likeLabel, viewsLabel, descriptionLabel, likeButton, viewButton].forEach { contentView.addSubview($0) }
+        view.backgroundColor = .systemBackground
+        view.addSubview(scrollView)
+        view.addSubview(contentView)
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+        
+        [titleLabel, postImageView, viewsLabel, descriptionLabel, viewButton].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -111,26 +119,19 @@ class PostTableViewCell: UITableViewCell {
             
             descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 8),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
-            
-            likeLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 19),
-            likeLabel.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: 8),
-            likeLabel.widthAnchor.constraint(equalToConstant: 40),
-            
-            likeButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 15),
-            likeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            likeButton.widthAnchor.constraint(equalToConstant: 25),
-            likeButton.heightAnchor.constraint(equalToConstant: 25),
+            descriptionLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -8),
             
             viewButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 15),
-            viewButton.trailingAnchor.constraint(equalTo: viewsLabel.leadingAnchor, constant: -8),
+            viewButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             viewButton.widthAnchor.constraint(equalToConstant: 25),
             viewButton.heightAnchor.constraint(equalToConstant: 25),
             
-            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 19),
-            viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            viewsLabel.centerYAnchor.constraint(equalTo: viewButton.centerYAnchor),
+            viewsLabel.leadingAnchor.constraint(equalTo: viewButton.trailingAnchor, constant: 8),
             viewsLabel.widthAnchor.constraint(equalToConstant: 40),
+            viewsLabel.heightAnchor.constraint(equalToConstant: 25)
         ])
     }
 }
+
+
