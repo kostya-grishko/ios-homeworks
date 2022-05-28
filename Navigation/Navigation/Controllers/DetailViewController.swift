@@ -9,13 +9,6 @@ class DetailViewController: UIViewController {
         return scrollView
     }()
     
-    private let contentView: UIView = {
-        let contentView = UIView()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.backgroundColor = .clear
-        return contentView
-    }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -88,48 +81,43 @@ class DetailViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .systemBackground
         view.addSubview(scrollView)
-        view.addSubview(contentView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
-            
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
-        [titleLabel, postImageView, viewsLabel, descriptionLabel, viewButton].forEach { contentView.addSubview($0) }
-        
+        [titleLabel, postImageView, viewsLabel, descriptionLabel, viewButton].forEach { scrollView.addSubview($0) }
+
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -8),
             titleLabel.heightAnchor.constraint(equalToConstant: 20),
-            
+            titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+
             postImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            postImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 0),
+            postImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 0),
             postImageView.heightAnchor.constraint(equalToConstant: 300),
-            
+
             descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 8),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8),
             descriptionLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -8),
-            
+
             viewButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 15),
-            viewButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            viewButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8),
             viewButton.widthAnchor.constraint(equalToConstant: 25),
             viewButton.heightAnchor.constraint(equalToConstant: 25),
-            
+            viewButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10),
+
             viewsLabel.centerYAnchor.constraint(equalTo: viewButton.centerYAnchor),
             viewsLabel.leadingAnchor.constraint(equalTo: viewButton.trailingAnchor, constant: 8),
             viewsLabel.widthAnchor.constraint(equalToConstant: 40),
-            viewsLabel.heightAnchor.constraint(equalToConstant: 25)
+            viewsLabel.heightAnchor.constraint(equalToConstant: 25),
         ])
     }
 }
