@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
         tableView.separatorInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.sectionHeaderHeight = 0.0
         tableView.sectionFooterHeight = 0.0
         return tableView

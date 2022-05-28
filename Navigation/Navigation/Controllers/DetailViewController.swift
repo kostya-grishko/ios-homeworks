@@ -71,6 +71,10 @@ class DetailViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
     func setupCell(_ post: Post) {
         titleLabel.text = post.title
         postImageView.image = UIImage(named: post.image!)

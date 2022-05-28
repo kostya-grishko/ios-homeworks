@@ -38,6 +38,10 @@ class PhotosViewController: UIViewController {
         self.navigationItem.backButtonTitle = "Back"
         self.navigationController?.navigationBar.isHidden = false
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
+    }
 }
 
 extension PhotosViewController: UICollectionViewDataSource {

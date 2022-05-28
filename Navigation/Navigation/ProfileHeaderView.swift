@@ -16,7 +16,7 @@ class ProfileHeaderView: UIView {
         profileImage.layer.borderWidth = 2
         profileImage.layer.borderColor = UIColor.systemGray2.cgColor
         profileImage.layer.cornerRadius = 75
-        profileImage.contentMode = .scaleAspectFit
+        profileImage.contentMode = .scaleAspectFill
         profileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(zoomImageView)))
         profileImage.isUserInteractionEnabled = true
         profileImage.clipsToBounds = true
@@ -113,7 +113,7 @@ class ProfileHeaderView: UIView {
     
     private func layout() {
         
-        self.backgroundColor = .white
+        self.backgroundColor = .systemBackground
         
         [profileImage, fullNameLabel, statusLabel, statusTextField, setStatusButton].forEach { addSubview($0) }
         

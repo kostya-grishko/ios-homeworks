@@ -60,5 +60,6 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
+        self.navigationController?.navigationBar.isHidden = false
     }
 }
