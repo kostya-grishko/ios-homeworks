@@ -76,7 +76,7 @@ class LogInViewController: UIViewController {
     
     private lazy var loginButton: UIButton = {
         let loginButton = UIButton()
-        loginButton.setTitle("Login", for: .normal)
+        loginButton.setTitle("Log in", for: .normal)
         loginButton.backgroundColor = UIColor("#4885CC")
         loginButton.layer.cornerRadius = 10
         loginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -186,7 +186,7 @@ class LogInViewController: UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "backgroundColor")
         navigationController?.navigationBar.isHidden = true
         [logoImage, loginDataTextField, loginButton, attentionLabel].forEach { scrollView.addSubview($0) }
         [loginTextField, passwordTextField].forEach { loginDataTextField.addArrangedSubview($0) }

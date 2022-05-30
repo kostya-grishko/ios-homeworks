@@ -44,7 +44,7 @@ class FeedViewController: UIViewController {
     }
     
     private func layout() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "backgroundColor")
         view.addSubview(buttonsStackView)
         [firstButton, secondButton].forEach { buttonsStackView.addArrangedSubview($0) }
         

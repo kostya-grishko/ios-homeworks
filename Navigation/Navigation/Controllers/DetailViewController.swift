@@ -13,9 +13,8 @@ class DetailViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
-        label.text = "Test test"
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+        label.textColor = UIColor(named: "otherColor")
         label.numberOfLines = 1
         return label
     }()
@@ -23,7 +22,6 @@ class DetailViewController: UIViewController {
     private let postImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "1")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -33,7 +31,7 @@ class DetailViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
-        label.text = "2311"
+        label.textColor = UIColor(named: "otherColor")
         label.font = UIFont.systemFont(ofSize: 14, weight: .thin)
         label.textAlignment = .left
         label.numberOfLines = 1
@@ -45,10 +43,10 @@ class DetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
         label.backgroundColor = .clear
+        label.textColor = UIColor(named: "otherColor")
         label.numberOfLines = 0
         label.textAlignment = .left
         label.sizeToFit()
-        label.text = "Time to treat your pets to some new accessories! Get the Grumpy Cat collection from @petrageousdesigns available at @amazon - (Link in bio) https://grumpy.cat/gcpetrageous"
         return label
     }()
     
@@ -56,6 +54,7 @@ class DetailViewController: UIViewController {
         let viewButton = UIImageView()
         viewButton.translatesAutoresizingMaskIntoConstraints = false
         viewButton.image = UIImage(named: "view")
+        viewButton.tintColor = UIColor(named: "otherColor")
         return viewButton
     }()
     
@@ -83,7 +82,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "backgroundColor")
         view.addSubview(scrollView)
         
         NSLayoutConstraint.activate([

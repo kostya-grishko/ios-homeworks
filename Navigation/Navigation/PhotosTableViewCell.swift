@@ -27,7 +27,7 @@ class PhotosTableViewCell: UITableViewCell {
         label.text = "Photo"
         label.backgroundColor = .clear
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+        label.textColor = UIColor(named: "otherColor")
         label.numberOfLines = 1
         return label
     }()
@@ -36,7 +36,8 @@ class PhotosTableViewCell: UITableViewCell {
         let pushButton = UIButton()
         pushButton.translatesAutoresizingMaskIntoConstraints = false
         pushButton.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
-        pushButton.setImage(UIImage(named: "strelka"), for: .normal)
+        pushButton.setImage(UIImage(named: "moveButton"), for: .normal)
+        pushButton.tintColor = UIColor(named: "otherColor")
         return pushButton
     }()
     
@@ -45,6 +46,7 @@ class PhotosTableViewCell: UITableViewCell {
     }
     
     private func layout() {
+        contentView.backgroundColor = UIColor(named: "backgroundColor")
         [photosTableCollectionView, titleLabel, pushButton].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([

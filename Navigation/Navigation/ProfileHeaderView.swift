@@ -29,7 +29,7 @@ class ProfileHeaderView: UIView {
         fullNameLabel.text = "Grumpy Cat"
         fullNameLabel.backgroundColor = .clear
         fullNameLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        fullNameLabel.textColor = .black
+        fullNameLabel.textColor = UIColor(named: "otherColor")
         fullNameLabel.numberOfLines = 1
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         return fullNameLabel
@@ -40,7 +40,7 @@ class ProfileHeaderView: UIView {
         statusLabel.text = "Waiting for something"
         statusLabel.backgroundColor = .clear
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        statusLabel.textColor = .gray
+        statusLabel.textColor = .systemGray
         statusLabel.numberOfLines = 1
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
@@ -50,7 +50,8 @@ class ProfileHeaderView: UIView {
         let statusTextField = UITextField()
         statusTextField.placeholder = "Edit your status"
         statusTextField.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        statusTextField.backgroundColor = .white
+        statusTextField.textColor = .systemGray
+        statusTextField.backgroundColor = UIColor(named: "backgroundColor")
         statusTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
         statusTextField.leftViewMode = .always
         statusTextField.layer.cornerRadius = 5
@@ -113,7 +114,7 @@ class ProfileHeaderView: UIView {
     
     private func layout() {
         
-        self.backgroundColor = .systemBackground
+        self.backgroundColor = UIColor(named: "backgroundColor")
         
         [profileImage, fullNameLabel, statusLabel, statusTextField, setStatusButton].forEach { addSubview($0) }
         
@@ -222,4 +223,9 @@ class ProfileHeaderView: UIView {
             self.zoomingImageView.alpha = 0
         }, completion: nil)
     }
+    
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        super.traitCollectionDidChange(previousTraitCollection)
+//        fullNameLabel.textColor =
+//    }
 }

@@ -16,7 +16,7 @@ class PhotosViewController: UIViewController {
     }()
     
     private func layout() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "backgroundColor")
         view.addSubview(photosCollectionView)
         
         NSLayoutConstraint.activate([

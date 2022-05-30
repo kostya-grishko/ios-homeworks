@@ -14,7 +14,7 @@ class PostTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+        label.textColor = UIColor(named: "otherColor")
         label.numberOfLines = 1
         return label
     }()
@@ -50,6 +50,7 @@ class PostTableViewCell: UITableViewCell {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor(named: "otherColor")
         label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
         label.backgroundColor = .clear
         label.numberOfLines = 0
@@ -59,6 +60,7 @@ class PostTableViewCell: UITableViewCell {
     
     lazy var likeButton: UIButton = {
         let likeButton = HeartButton()
+        likeButton.tintColor = UIColor(named: "otherColor")
         likeButton.translatesAutoresizingMaskIntoConstraints = false
         likeButton.addTarget(self, action: #selector(handleHeartButtonTap(_:)), for: .touchUpInside)
         return likeButton
@@ -68,6 +70,7 @@ class PostTableViewCell: UITableViewCell {
         let viewButton = UIImageView()
         viewButton.translatesAutoresizingMaskIntoConstraints = false
         viewButton.image = UIImage(named: "view")
+        viewButton.tintColor = UIColor(named: "otherColor")
         return viewButton
     }()
     
@@ -96,6 +99,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
+        contentView.backgroundColor = UIColor(named: "backgroundColor")
         [titleLabel, postImageView, likeLabel, viewsLabel, descriptionLabel, likeButton, viewButton].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([

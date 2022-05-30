@@ -5,8 +5,8 @@ class HeartButton: UIButton {
     
     open var isLiked = false
     
-    private let unlikedImage = UIImage(named: "heart 1")
-    private let likedImage = UIImage(named: "heart 2")
+    private let unlikedImage = UIImage(named: "heartNotLiked")
+    private let likedImage = UIImage(named: "heartLiked")
     
     private let unlikedScale: CGFloat = 0.7
     private let likedScale: CGFloat = 1.3
